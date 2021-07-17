@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import Layout from '@/components/Layout';
 import Pagination from '@/components/Pagination';
+import VipList from '@/components/VipList';
 import { API_URL } from '@/config/index';
 import { upcomingIn, late } from '@/utils/index';
 
@@ -93,27 +93,10 @@ export default function HomePage({ vips }) {
         )}
       </h1>
 
-      {currentVipsDisplay(currentPage, vipsPerPage).length === 0 && (
-        <h3>No VIPs to show</h3>
-      )}
-
-      <ul>
-        {currentVipsDisplay(currentPage, vipsPerPage).map((vip) => (
-          <li key={vip.id}>
-            <Link href={`/vips/${vip.id}`}>
-              <a>
-                {vip.name} {late(vip) ? '(late)' : ''}
-              </a>
-            </Link>
-            {' | '}
-            {!vip.arrived && (
-              <button onClick={() => onClickArrivedHandler(vip.id)}>
-                Arrived
-              </button>
-            )}
-          </li>
-        ))}
-      </ul>
+      <VipList
+        currentVipsDisplay={currentVipsDisplay(currentPage, vipsPerPage)}
+        onClickArrivedHandler={onClickArrivedHandler}
+      />
 
       <Pagination
         vipsPerPage={vipsPerPage}
