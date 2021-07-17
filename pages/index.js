@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
+import Pagination from '@/components/Pagination';
 import { API_URL } from '@/config/index';
-import { upcomingIn, late } from 'utils';
+import { upcomingIn, late } from '@/utils/index';
 
 export default function HomePage({ vips }) {
   const [minutes, setMinutes] = useState(15);
   const [upcomingVips, setUpcomingVips] = useState(vips);
   const [vipDisplay, setVipDisplay] = useState([]);
   const [filter, setFilter] = useState('upcoming');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [vipsPerPage, setVipsPerPage] = useState(10);
 
   useEffect(() => {
     (async () => {
@@ -28,7 +31,17 @@ export default function HomePage({ vips }) {
           break;
       }
     })();
+    setCurrentPage(1);
   }, [filter, minutes, upcomingVips]);
+
+  const currentVipsDisplay = (currentPage, vipsPerPage) => {
+    if (!vipsPerPage) {
+      return [];
+    }
+    const indexOfLastVips = currentPage * vipsPerPage;
+    const indexOfFirstVips = indexOfLastVips - vipsPerPage;
+    return vipDisplay.slice(indexOfFirstVips, indexOfLastVips);
+  };
 
   const onClickArrivedHandler = async (id) => {
     const res = await fetch(`${API_URL}/vips/${id}`, {
@@ -80,10 +93,12 @@ export default function HomePage({ vips }) {
         )}
       </h1>
 
-      {vipDisplay.length === 0 && <h3>No VIPs to show</h3>}
+      {currentVipsDisplay(currentPage, vipsPerPage).length === 0 && (
+        <h3>No VIPs to show</h3>
+      )}
 
       <ul>
-        {vipDisplay.map((vip) => (
+        {currentVipsDisplay(currentPage, vipsPerPage).map((vip) => (
           <li key={vip.id}>
             <Link href={`/vips/${vip.id}`}>
               <a>
@@ -99,6 +114,13 @@ export default function HomePage({ vips }) {
           </li>
         ))}
       </ul>
+
+      <Pagination
+        vipsPerPage={vipsPerPage}
+        totalVips={vipDisplay.length}
+        paginate={(pageNumber) => setCurrentPage(pageNumber)}
+        changeLimit={(limit) => setVipsPerPage(limit)}
+      />
     </Layout>
   );
 }
