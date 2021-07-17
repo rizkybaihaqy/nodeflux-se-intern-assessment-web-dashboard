@@ -12,13 +12,53 @@ module.exports = () => {
           .replace(/T/, ' ')
           .replace(/[.]\d+Z/, ''),
         arrived: false,
-        photo:
-          'https://img.olympicchannel.com/images/image/private/t_1-1_600/f_auto/v1538355600/primary/xvswt1wild3ewrxoruhx',
+        photo: faker.image.avatar(),
         attributes: ['red jacket indonesian team', 'blue jeans'],
+      },
+      {
+        id: 2,
+        name: 'Ferdinand Sinaga',
+        country_of_origin: 'Indonesia',
+        eta: new Date(new Date().setMinutes(new Date().getMinutes() + 5))
+          .toISOString()
+          .replace(/T/, ' ')
+          .replace(/[.]\d+Z/, ''),
+        arrived: false,
+        photo: faker.image.avatar(),
+        attributes: ['indonesian team jersey', 'blue jeans'],
+      },
+      {
+        id: 3,
+        name: 'Kurnia Mega',
+        country_of_origin: 'Indonesia',
+        eta: new Date(new Date().setMinutes(new Date().getMinutes() + 18))
+          .toISOString()
+          .replace(/T/, ' ')
+          .replace(/[.]\d+Z/, ''),
+        arrived: false,
+        photo: faker.image.avatar(),
+        attributes: ['indonesian jersey', 'gloves'],
+      },
+      {
+        id: 4,
+        name: 'Septian Dwi Kustanto',
+        country_of_origin: 'Indonesia',
+        eta: new Date(new Date().setMinutes(new Date().getMinutes() - 5))
+          .toISOString()
+          .replace(/T/, ' ')
+          .replace(/[.]\d+Z/, ''),
+        arrived: false,
+        photo: faker.image.avatar(),
+        attributes: ['sunglasses', 'polo shirt'],
       },
     ],
   };
-  for (let i = 2; i < 30; i++) {
+  for (let i = 11; i < 31; i++) {
+    attributes = [];
+    for (let j = 0; j < faker.datatype.number(5); j++) {
+      attributes.push(faker.commerce.product());
+    }
+
     data.vips.push({
       id: i,
       name: faker.name.findName(),
@@ -30,7 +70,7 @@ module.exports = () => {
         .replace(/[.]\d+Z/, ''),
       arrived: faker.datatype.boolean(),
       photo: faker.image.avatar(),
-      attributes: [faker.commerce.product()],
+      attributes,
     });
   }
   return data;
