@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Layout from '@/components/Layout';
 import Pagination from '@/components/Pagination';
 import VipList from '@/components/VipList';
+import HeadingWithFilter from '@/components/HeadingWithFilter';
 import { API_URL } from '@/config/index';
 import { upcomingIn, late } from '@/utils/index';
 
@@ -66,32 +67,12 @@ export default function HomePage({ vips }) {
 
   return (
     <Layout>
-      <h1>
-        <select
-          value={filter}
-          onChange={(e) => {
-            setFilter(e.target.value);
-          }}
-        >
-          <option value="all">All</option>
-          <option value="upcoming">Upcoming</option>
-          <option value="late">Late</option>
-        </select>{' '}
-        VIPs
-        {filter === 'upcoming' && (
-          <>
-            <span> in </span>
-            <input
-              type="number"
-              value={minutes}
-              onChange={(e) => {
-                setMinutes(e.target.value);
-              }}
-            />
-            <span> Minutes </span>
-          </>
-        )}
-      </h1>
+      <HeadingWithFilter
+        filter={filter}
+        minutes={minutes}
+        setFilter={setFilter}
+        setMinutes={setMinutes}
+      />
 
       <VipList
         currentVipsDisplay={currentVipsDisplay(currentPage, vipsPerPage)}
