@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "json-server": "json-server --watch db/index.js --port 3004"
+    "json-server": "json-server --watch db/index.js --config json-server.json"
   },
   "dependencies": {
     "next": "11.0.1",
