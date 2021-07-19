@@ -5,8 +5,9 @@ export default function HeadingWithFilter({
   setMinutes,
 }) {
   return (
-    <h1>
+    <h1 className="text-3xl font-bold flex justify-center mt-20">
       <select
+        className="font-bold text-blue-800 underline"
         value={filter}
         onChange={(e) => {
           setFilter(e.target.value);
@@ -19,8 +20,10 @@ export default function HeadingWithFilter({
       VIPs
       {filter === 'upcoming' && (
         <>
-          <span> in </span>
+          {' '}
+          in{' '}
           <input
+            className="w-16 mx-2 text-blue-800 font-bold"
             type="number"
             value={minutes}
             onChange={(e) => {
