@@ -33,7 +33,7 @@ export default function VipList({ currentVipsDisplay, onClickArrivedHandler }) {
                 className="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
               >
                 <Link href={`/vips/${vip.id}`} passHref>
-                  <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                  <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static cursor-pointer">
                     <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                       Name
                     </span>
@@ -64,7 +64,7 @@ export default function VipList({ currentVipsDisplay, onClickArrivedHandler }) {
                     },
                   )}{' '}
                   {late(vip) && (
-                    <span className="rounded bg-red-400 py-1 px-3 text-xs font-bold">
+                    <span className="rounded bg-red-400 py-1 px-3 text-xs font-bold text-white">
                       LATE
                     </span>
                   )}
