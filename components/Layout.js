@@ -1,10 +1,9 @@
 import Head from 'next/head';
-import styles from '@/styles/Home.module.css';
 
 export default function Layout({ children }) {
   return (
     <div>
-      <div className={styles.container}>
+      <div>
         <Head>
           <title>Tokyo 2020 Receptionist Team Web App</title>
           <meta
@@ -14,7 +13,7 @@ export default function Layout({ children }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <main className={styles.main}>{children}</main>
+        <main>{children}</main>
       </div>
     </div>
   );
