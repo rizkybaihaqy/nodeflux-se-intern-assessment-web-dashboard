@@ -3,7 +3,10 @@ import Image from 'next/image';
 import ArrivalToggle from './ArrivalToggle';
 import { late } from '@/utils/index';
 
-export default function VipList({ currentVipsDisplay, onClickArrivedHandler }) {
+export default function VipList({
+  currentVipsDisplay,
+  onChangeArrivedHandler,
+}) {
   return (
     <div className="mx-20 my-10">
       {currentVipsDisplay.length === 0 ? (
@@ -73,9 +76,8 @@ export default function VipList({ currentVipsDisplay, onClickArrivedHandler }) {
                   <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                     Status
                   </span>
-                  
                   <ArrivalToggle
-                    onClickArrivedHandler={onClickArrivedHandler}
+                    onChangeArrivedHandler={onChangeArrivedHandler}
                     vip={vip}
                   />
                 </td>

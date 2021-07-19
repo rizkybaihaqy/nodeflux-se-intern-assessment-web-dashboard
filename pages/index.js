@@ -45,7 +45,7 @@ export default function HomePage({ vips }) {
     return vipDisplay.slice(indexOfFirstVips, indexOfLastVips);
   };
 
-  const onClickArrivedHandler = async (vip, value) => {
+  const updateArrivalStatus = async (vip, value) => {
     const res = await fetch(`${API_URL}/vips/${vip.id}`, {
       method: 'PATCH',
       headers: {
@@ -85,7 +85,7 @@ export default function HomePage({ vips }) {
 
       <VipList
         currentVipsDisplay={currentVipsDisplay(currentPage, vipsPerPage)}
-        onClickArrivedHandler={onClickArrivedHandler}
+        onChangeArrivedHandler={updateArrivalStatus}
       />
 
       <Pagination

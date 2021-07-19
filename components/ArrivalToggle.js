@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Switch } from '@headlessui/react';
 
-export default function ArrivalToggle({ onClickArrivedHandler, vip }) {
+export default function ArrivalToggle({ onChangeArrivedHandler, vip }) {
   const [enabled, setEnabled] = useState(vip.arrived);
 
   const onChangeHandler = (value) => {
     setEnabled(value);
-    onClickArrivedHandler(vip, value);
+    onChangeArrivedHandler(vip, value);
   };
 
   return (
