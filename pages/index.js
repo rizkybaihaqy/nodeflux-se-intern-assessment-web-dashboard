@@ -28,6 +28,7 @@ export default function HomePage({ vips }) {
         default:
           const res = await fetch(`${API_URL}/vips?_sort=eta&arrived=true`);
           const arrivedVips = await res.json();
+
           setVipDisplay([...upcomingVips, ...arrivedVips]);
           break;
       }
@@ -44,13 +45,13 @@ export default function HomePage({ vips }) {
     return vipDisplay.slice(indexOfFirstVips, indexOfLastVips);
   };
 
-  const onClickArrivedHandler = async (id) => {
-    const res = await fetch(`${API_URL}/vips/${id}`, {
+  const onClickArrivedHandler = async (vip, value) => {
+    const res = await fetch(`${API_URL}/vips/${vip.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ arrived: true }),
+      body: JSON.stringify({ arrived: value }),
     });
 
     if (!res.ok) {
@@ -58,10 +59,18 @@ export default function HomePage({ vips }) {
     }
 
     const newUpcomingVips = [...upcomingVips];
-    newUpcomingVips.splice(
-      newUpcomingVips.findIndex((vip) => vip.id === id),
-      1,
-    );
+    if (value) {
+      newUpcomingVips.splice(
+        newUpcomingVips.findIndex(
+          (newUpcomingVip) => newUpcomingVip.id === vip.id,
+        ),
+        1,
+      );
+    } else {
+      vip.arrived = value;
+      newUpcomingVips.push(vip);
+    }
+
     setUpcomingVips(newUpcomingVips);
   };
 

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import ArrivalToggle from './ArrivalToggle';
 import { late } from '@/utils/index';
 
 export default function VipList({ currentVipsDisplay, onClickArrivedHandler }) {
@@ -72,11 +73,11 @@ export default function VipList({ currentVipsDisplay, onClickArrivedHandler }) {
                   <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                     Status
                   </span>
-                  {!vip.arrived && (
-                    <button onClick={() => onClickArrivedHandler(vip.id)}>
-                      Arrived
-                    </button>
-                  )}
+                  
+                  <ArrivalToggle
+                    onClickArrivedHandler={onClickArrivedHandler}
+                    vip={vip}
+                  />
                 </td>
               </tr>
             ))}
