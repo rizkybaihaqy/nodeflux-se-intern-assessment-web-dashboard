@@ -1,3 +1,7 @@
+/**
+ * Mainly used as array filter,
+ * format string to date object
+ */
 export const upcomingIn = (minutes) => {
   return (vip) => {
     const minutesFromNow = new Date(
@@ -8,6 +12,10 @@ export const upcomingIn = (minutes) => {
   };
 };
 
+/**
+ * mainly used as array filter,
+ * format string to date object
+ */
 export const late = (vip) => {
   const now = new Date();
   const date = new Date(vip.eta.replace(/\s/, 'T') + 'Z');
