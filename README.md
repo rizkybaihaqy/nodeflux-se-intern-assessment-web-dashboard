@@ -26,3 +26,10 @@ A Web Dashboard (receptionist team as the end-user) that can get VIPs informatio
     npm run build;
     npm start
     ```
+
+## Known Issues
+- Sometimes the pagination state doesn't reset to page 1
+- State isn't sorted when changing the vip state from arrived to upcoming
+
+## Ideas
+- Sorting by name or country at data table
